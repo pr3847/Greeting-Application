@@ -5,42 +5,42 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bridgelabz.greetingapp.dao.GreetingDao;
-import com.bridgelabz.greetingapp.entities.GreetingEntities;
+import com.bridgelabz.greetingapp.model.Greeting;
+import com.bridgelabz.greetingapp.repository.GreetingRepository;
 
 @Service
-public class ServiceImpl implements MyService {
+public class ServiceImpl implements IService {
 	
 	@Autowired
-	GreetingDao greetingDao;
+	GreetingRepository greetingRepo;
 	@Override
-	public List<GreetingEntities> getGreetings() {
+	public List<Greeting> getGreetings() {
 		// TODO Auto-generated method stub
-		return greetingDao.findAll();
+		return greetingRepo.findAll();
 	}
 
 	@Override
-	public GreetingEntities getGreeting(long id) {
+	public Greeting getGreeting(long id) {
 		// TODO Auto-generated method stub
-		return greetingDao.findById(id).get();
+		return greetingRepo.findById(id).orElse(null);
 	}
 
 	@Override
-	public void addGreeting(GreetingEntities msg) {
+	public void addGreeting(Greeting msg) {
 		// TODO Auto-generated method stub
-		  greetingDao.save(msg);
+		  greetingRepo.save(msg);
 	}
 
 	@Override
-	public void putGreeting(GreetingEntities msg) {
+	public void putGreeting(Greeting msg) {
 		// TODO Auto-generated method stub
-		 greetingDao.save(msg);
+		 greetingRepo.save(msg);
 	}
 
 	@Override
 	public void deleteGreeting(long id) {
 		// TODO Auto-generated method stub
-		greetingDao.deleteById(id);		
+		greetingRepo.deleteById(id);		
 	}
 	
 }
